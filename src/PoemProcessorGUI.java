@@ -55,6 +55,10 @@ public class PoemProcessorGUI {
         deleteButton.addActionListener(new DeletePoemListener());
         buttonPanel.add(deleteButton);
 
+        JButton tokenizeButton = new JButton("Tokenize");
+        tokenizeButton.addActionListener(new TokenizeListener());
+        buttonPanel.add(tokenizeButton);
+
         frame.add(buttonPanel, BorderLayout.SOUTH);
 
         frame.pack();
@@ -101,6 +105,20 @@ public class PoemProcessorGUI {
         }
     }
 
+    private class TokenizeListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            textArea.setText(""); // Clear the text area
+
+            for (String line : poemLines) {
+                String[] tokens = line.split(" ");
+                for (String token : tokens) {
+                    textArea.append(token + "\n");
+                }
+                textArea.append("\n");
+            }
+        }
+    }
 
     private void displayPoem() {
         textArea.setText(""); // Clear the text area
